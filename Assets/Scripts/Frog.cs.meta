@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 432c87eae7c04d44db3385fc3e2d7bbf
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - rb: {instanceID: 0}
+  - splash: {instanceID: 0}
+  - frog: {instanceID: 0}
+  - splatSound: {instanceID: 0}
+  - trombone: {fileID: 8300000, guid: 056fa05480d2a534e84385e4d75b92dd, type: 3}
+  - jump: {fileID: 8300000, guid: ffdecc1b6d365834d87defd41f65f012, type: 3}
+  - audioSrc: {instanceID: 0}
+  - lifeText: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
