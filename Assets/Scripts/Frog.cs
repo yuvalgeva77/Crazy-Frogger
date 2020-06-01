@@ -7,15 +7,15 @@ using UnityEngine.UI;
 public class Frog : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public Sprite splash, frog;
-    public AudioClip splatSound, trombone,jump;
+    public Sprite splash, underwater, frog;
+    public AudioClip splatSound, drownSound, trombone,jump;
     public AudioSource audioSrc;
     Freezer _freezer;
     public float duration = 1f;
     public int life=3;
    // public Text lifeText;
-    private Vector2 startPos;
-    private bool hitbool = false, _isfreeze=false;
+    public Vector2 startPos;
+    private bool drownbool = false, hitbool = false, _isfreeze=false;
     private float _attackTimer = 0f;
     public Health_bar healthBar;
 
@@ -77,6 +77,10 @@ public class Frog : MonoBehaviour
         {
             hit();
         }
+        if (col.tag == "water")
+        {
+            drown();
+        }
 
     }
     void SetLifeText()
@@ -99,16 +103,21 @@ public class Frog : MonoBehaviour
             // this.gameObject.GetComponent<SpriteRenderer>().sprite = frog;
             //hitbool = false;
         }
-        if (life == 0)
+        checkDead();
+      
+    }
+    void drown()
+    {
+        life = life - 1;
+        SetLifeText();
+        drownbool = true;
+        if (life > 0)
         {
-            audioSrc.PlayOneShot(splatSound);
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = splash;
+            audioSrc.PlayOneShot(drownSound);
+            Debug.Log("Youve drowned!");
             _freezer.Freeze();
-            _freezer.freezebackMusic();
-            audioSrc.PlayOneShot(trombone);
-            Debug.Log("You loose!");
-            Destroy(this);
         }
+        checkDead();
     }
     void changeImage()
     {
@@ -116,9 +125,11 @@ public class Frog : MonoBehaviour
         {
             _isfreeze = true;
             this.gameObject.GetComponent<SpriteRenderer>().sprite = splash;
-           
-            // _attackTimer = 0f;  //option to reset time
-
+        }
+        if (drownbool == true)
+        {
+            _isfreeze = true;
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = underwater;
         }
         // while attacking, count up the timer.
         if (_isfreeze)
@@ -130,12 +141,24 @@ public class Frog : MonoBehaviour
             {
                 _isfreeze = false;
                 hitbool = false;
+                drownbool = false;
                 _attackTimer = 0;
                 rb.MovePosition(startPos);
                 this.gameObject.GetComponent<SpriteRenderer>().sprite = frog;
-                //   hitbool = false;
-
             }
+        }
+    }
+    void checkDead()
+    {
+        if (life == 0)
+        {
+            audioSrc.PlayOneShot(splatSound);
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = splash;
+            _freezer.Freeze();
+            _freezer.freezebackMusic();
+            audioSrc.PlayOneShot(trombone);
+            Debug.Log("You loose!");
+            Destroy(this);
         }
     }
 }
