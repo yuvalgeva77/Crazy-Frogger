@@ -10,6 +10,7 @@ TagManager:
   - bird
   - Manager
   - backround
+  - water
   layers:
   - Default
   - TransparentFX
