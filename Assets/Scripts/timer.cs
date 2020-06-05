@@ -16,7 +16,7 @@ public class timer : MonoBehaviour {
     public AudioSource audioSrc;
     bool timesUp = false;
     Freezer _freezer;
-    public float restartduration = 3f;
+    float restartduration = 10f;
 
     void Start()
     {
@@ -37,21 +37,7 @@ public class timer : MonoBehaviour {
         TOTAL_SECONDS = totalSeconds;
         StartCoroutine(second());
     }
-    void OnLevelWasLoaded(int leve) //Reset Score and time scale using the "Game Over Menu" "Play Again" button
-    {
-
-        sec = sectesOnStart;
-        minutes = minutesOnStart;
  
-        //timer
-        timeText.text = minutes + " : " + sec;
-        if (minutes > 0)
-            totalSeconds += minutes * 60;
-        if (sec > 0)
-            totalSeconds += sec;
-        TOTAL_SECONDS = totalSeconds;
-        StartCoroutine(second());
-    }
 
     void Update()
     {//time ended

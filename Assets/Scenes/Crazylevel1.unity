@@ -15714,7 +15714,6 @@ MonoBehaviour:
   sectesOnStart: 5
   clockRing: {fileID: 8300000, guid: 4f021c6439728154b8687224f9d8e3d8, type: 3}
   audioSrc: {fileID: 0}
-  restartduration: 10
 --- !u!82 &8796946190357440742
 AudioSource:
   m_ObjectHideFlags: 0
