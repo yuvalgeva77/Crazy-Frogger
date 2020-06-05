@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Crazylevel1.unity
+    guid: 2a89ef0bcd3c1334ba1bad52c3b10eef
   m_configObjects: {}
