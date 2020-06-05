@@ -152,8 +152,9 @@ public class Frog : MonoBehaviour
     {
         if (life == 0)
         {
+            changeImage();
             audioSrc.PlayOneShot(splatSound);
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = splash;
+            //this.gameObject.GetComponent<SpriteRenderer>().sprite = splash;
             _freezer.Freeze();
             _freezer.freezebackMusic();
             audioSrc.PlayOneShot(trombone);
