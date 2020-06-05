@@ -148,12 +148,24 @@ public class Frog : MonoBehaviour
             }
         }
     }
+    void dieSound()
+    {
+        if (hitbool == true)
+        {
+            audioSrc.PlayOneShot(splatSound);
+        }
+        if (drownbool == true)
+        {
+            audioSrc.PlayOneShot(drownSound);
+        }
+    }
     void checkDead()
     {
         if (life == 0)
         {
+            dieSound();
             changeImage();
-            audioSrc.PlayOneShot(splatSound);
+            //audioSrc.PlayOneShot(splatSound);
             //this.gameObject.GetComponent<SpriteRenderer>().sprite = splash;
             _freezer.Freeze();
             _freezer.freezebackMusic();
