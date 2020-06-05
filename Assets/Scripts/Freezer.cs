@@ -11,6 +11,7 @@ public class Freezer : MonoBehaviour
     private float duration=1f;
     bool nextScene = false;
     bool endScene = false;
+    bool restartScene = false;
     AudioSource backMusic ;
 
 
@@ -67,18 +68,26 @@ public class Freezer : MonoBehaviour
         Time.timeScale = orginal;
         _pendingFreezeDuration = 0;
         _isFrozen = false;
-        if(nextScene==false&& endScene==false)
+        if(nextScene==false&& endScene==false&& restartScene==false)
         backMusic.UnPause();
         if (nextScene == true)
             nextScenefunc();
         if (endScene == true)       
             endGame();
+        if (restartScene == true)
+            restartScenefunc();
 
     }
     void nextScenefunc()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         nextScene = false;
+        backMusic.UnPause();
+    }
+    void restartScenefunc()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex );
+        restartScene = false;
         backMusic.UnPause();
     }
 
@@ -95,4 +104,10 @@ public class Freezer : MonoBehaviour
     {
         backMusic.Stop();
     }
+
+public void FreezeAndRestartScene(float restartduration)
+{
+    _pendingFreezeDuration = restartduration;
+    restartScene = true;
+}
 }

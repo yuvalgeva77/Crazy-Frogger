@@ -6,14 +6,44 @@ using UnityEngine.SceneManagement;
 public class timer : MonoBehaviour {
     public Image loading;
     public Text timeText;
-    public int minutes;
-    public int sec;
+    public int minutesOnStart;
+    public int  sectesOnStart;
+    private int minutes,sec;
     int totalSeconds = 0;
     int TOTAL_SECONDS = 0;
     float fillamount;
+    public AudioClip clockRing;
+    public AudioSource audioSrc;
+    bool timesUp = false;
+    Freezer _freezer;
+    public float restartduration = 3f;
 
     void Start()
     {
+        sec = sectesOnStart;
+        minutes = minutesOnStart;
+        audioSrc = GetComponent<AudioSource>();
+        GameObject ngr = GameObject.FindWithTag("Manager");
+        if (ngr)
+        {
+            _freezer = ngr.GetComponent<Freezer>();
+        }
+        //timer
+        timeText.text = minutes + " : " + sec;
+        if (minutes > 0)
+            totalSeconds += minutes * 60;
+        if (sec > 0)
+            totalSeconds += sec;
+        TOTAL_SECONDS = totalSeconds;
+        StartCoroutine(second());
+    }
+    void OnLevelWasLoaded(int leve) //Reset Score and time scale using the "Game Over Menu" "Play Again" button
+    {
+
+        sec = sectesOnStart;
+        minutes = minutesOnStart;
+ 
+        //timer
         timeText.text = minutes + " : " + sec;
         if (minutes > 0)
             totalSeconds += minutes * 60;
@@ -24,11 +54,18 @@ public class timer : MonoBehaviour {
     }
 
     void Update()
-    {
-        if (sec == 0 && minutes == 0)
+    {//time ended
+        if (sec == 0 && minutes == 0 )
         {
             timeText.text = "Time's Up!";
-            StopCoroutine(second());
+            if (!timesUp) {
+                audioSrc.PlayOneShot(clockRing);
+                _freezer.FreezeAndRestartScene(restartduration);
+                StopCoroutine(second());
+                timesUp = true;
+            }
+
+
         }
     }
     IEnumerator second()
