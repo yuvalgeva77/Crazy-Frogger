@@ -17,9 +17,11 @@ public class timer : MonoBehaviour {
     bool timesUp = false;
     Freezer _freezer;
     float restartduration = 10f;
+   public bool timergoint = false;
 
     void Start()
     {
+        timergoint = false;
         sec = sectesOnStart;
         minutes = minutesOnStart;
         audioSrc = GetComponent<AudioSource>();
@@ -28,6 +30,15 @@ public class timer : MonoBehaviour {
         {
             _freezer = ngr.GetComponent<Freezer>();
         }
+        timeText.text = 0 + " : " + 0;
+
+    }
+    private void Awake()
+    {
+        //Instance = this;
+    }
+    public void beginTimer()
+    {      
         //timer
         timeText.text = minutes + " : " + sec;
         if (minutes > 0)
@@ -36,11 +47,11 @@ public class timer : MonoBehaviour {
             totalSeconds += sec;
         TOTAL_SECONDS = totalSeconds;
         StartCoroutine(second());
+        timergoint = true;
     }
- 
-
     void Update()
-    {//time ended
+    { 
+        //time ended
         if (sec == 0 && minutes == 0 )
         {
             timeText.text = "Time's Up!";
@@ -56,17 +67,19 @@ public class timer : MonoBehaviour {
     }
     IEnumerator second()
     {
-        yield return new WaitForSeconds(1f);
-        if (sec > 0)
-            sec--;
-        if (sec == 0 && minutes != 0)
-        {
-            sec = 60;
-            minutes--;
-        }
-        timeText.text = minutes + " : " + sec;
-        fillLoading();
-        StartCoroutine(second());
+        
+            yield return new WaitForSeconds(1f);
+            if (sec > 0)
+                sec--;
+            if (sec == 0 && minutes != 0)
+            {
+                sec = 60;
+                minutes--;
+            }
+            timeText.text = minutes + " : " + sec;
+            fillLoading();
+            StartCoroutine(second());
+        
     }
 
     void fillLoading()

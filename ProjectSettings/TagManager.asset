@@ -11,6 +11,8 @@ TagManager:
   - Manager
   - backround
   - water
+  - backMusic
+  - timer
   layers:
   - Default
   - TransparentFX
