@@ -8,7 +8,7 @@ public class Frog : MonoBehaviour
 {
     public Rigidbody2D rb;
     public Sprite splash, underwater, frog;
-    public AudioClip splatSound, drownSound, trombone,jump;
+    public AudioClip splatSound, drownSound, trombone;
     public AudioSource audioSrc;
     Freezer _freezer;
     public float duration = 1f;
@@ -28,11 +28,10 @@ public class Frog : MonoBehaviour
     }
      void Start()
     {
-        //this.gameObject.GetComponent<SpriteRenderer>().sprite = frog;
+        this.gameObject.GetComponent<SpriteRenderer>().sprite = frog;
         life = 3;
         
         healthBar.SetMaxHealth(life);
-        startPos = rb.position;
         GameObject ngr = GameObject.FindWithTag("Manager");
         if (ngr)
         {
@@ -46,26 +45,7 @@ public class Frog : MonoBehaviour
     void Update()
     {
         this.gameObject.GetComponent<SpriteRenderer>().sprite = frog;
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            audioSrc.PlayOneShot(jump);
-            rb.MovePosition(rb.position + Vector2.right);
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            audioSrc.PlayOneShot(jump);
-            rb.MovePosition(rb.position + Vector2.left);
-        }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            audioSrc.PlayOneShot(jump);
-            rb.MovePosition(rb.position + Vector2.up);
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            audioSrc.PlayOneShot(jump);
-            rb.MovePosition(rb.position + Vector2.down);
-        }
+        
         changeImage();
 
 

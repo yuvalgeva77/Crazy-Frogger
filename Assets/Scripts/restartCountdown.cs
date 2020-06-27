@@ -11,6 +11,8 @@ public class restartCountdown : MonoBehaviour
     public Text countdownDisplay;
     Freezer _freezer;
     timer StartTimer;
+    GameObject player;
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,8 @@ public class restartCountdown : MonoBehaviour
         GameObject gameTimer = GameObject.FindWithTag("timer");
         if (gameTimer)
         {
+            player = GameObject.FindWithTag("Player");
+            player.GetComponent<playermovment>() .enabled = false;
             StartTimer = gameTimer.GetComponent<timer>();
         }
     }
@@ -35,6 +39,7 @@ public class restartCountdown : MonoBehaviour
     }
     IEnumerator CountdownToStart()
     {
+        //player.GetComponent<playermovment>().enabled = false;
         while (countdoenTimer > 0)
         {
             countdownDisplay.text = countdoenTimer.ToString();
@@ -47,5 +52,7 @@ public class restartCountdown : MonoBehaviour
         //_freezer.FreezeAndRestartScene(3f);
         yield return new WaitForSeconds(1f);
         countdownDisplay.gameObject.SetActive(false);
+        player.GetComponent<playermovment>().enabled = true;
+
     }
 }
