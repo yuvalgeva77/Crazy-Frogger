@@ -18,6 +18,7 @@ public class Frog : MonoBehaviour
     private bool drownbool = false, hitbool = false, _isfreeze=false;
     private float _attackTimer = 0f;
     public Health_bar healthBar;
+    playermovment frogMove;
 
     // Update is called once per frame
     void Awake()
@@ -40,7 +41,9 @@ public class Frog : MonoBehaviour
            
             
         }
-       
+        frogMove = this.gameObject.GetComponent<playermovment>();
+
+
     }
     void Update()
     {
@@ -123,7 +126,8 @@ public class Frog : MonoBehaviour
                 hitbool = false;
                 drownbool = false;
                 _attackTimer = 0;
-                rb.MovePosition(startPos);
+                frogMove.hit();
+                //rb.MovePosition(startPos);
                 this.gameObject.GetComponent<SpriteRenderer>().sprite = frog;
             }
         }

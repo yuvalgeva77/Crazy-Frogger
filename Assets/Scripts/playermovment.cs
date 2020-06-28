@@ -74,5 +74,9 @@ public class playermovment : MonoBehaviour
         }
         directions[0] = dTemp;
     }
+    public void hit()
+    {
+        rb.MovePosition(startPos);
+    }
 }
 
