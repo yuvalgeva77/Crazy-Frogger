@@ -19,6 +19,7 @@ public class Frog : MonoBehaviour
     private float _attackTimer = 0f;
     public Health_bar healthBar;
     playermovment frogMove;
+    text_announcments levelText;
 
     // Update is called once per frame
     void Awake()
@@ -42,7 +43,7 @@ public class Frog : MonoBehaviour
             
         }
         frogMove = this.gameObject.GetComponent<playermovment>();
-
+        levelText = GameObject.Find("game levels").GetComponent<text_announcments>();
 
     }
     void Update()
@@ -63,6 +64,13 @@ public class Frog : MonoBehaviour
         if (col.tag == "water")
         {
             drown();
+        }
+        if (col.tag == "level")
+        {
+            string levelT=frogMove.levelPoint(col.name);
+            levelText.writeText(levelT, 2);
+            _freezer.Freeze();
+
         }
 
     }

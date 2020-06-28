@@ -9,6 +9,7 @@ public class playermovment : MonoBehaviour
     public AudioClip  jump;
     public AudioSource audioSrc;
     KeyCode[] directions;
+    int countlevel2, countlevel2H;
     // Start is called before the first frame update
 
     void Awake()
@@ -16,10 +17,13 @@ public class playermovment : MonoBehaviour
 
         audioSrc = GetComponent<AudioSource>();
         startPos = rb.position;
+
     }
     void Start()
     {
         directions = new KeyCode[] { KeyCode.RightArrow, KeyCode.LeftArrow, KeyCode.UpArrow, KeyCode.DownArrow };
+        countlevel2 = 0;
+        countlevel2H = 0;
     }
     // Update is called once per frame
     void Update()
@@ -65,18 +69,40 @@ public class playermovment : MonoBehaviour
         directions[2] = dTemp;
     }
     void hardrotateControls()
-    {
-        KeyCode dTemp = directions[3];
-        for (int i = 2; i >= 0; i--)
-        {
-            directions[i + 1] = directions[i];
+    {   directions= new KeyCode[] { KeyCode.UpArrow,  KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow};
+        //KeyCode dTemp = directions[3];
+        //for (int i = 2; i >= 0; i--)
+        //{
+        //    directions[i + 1] = directions[i];
 
-        }
-        directions[0] = dTemp;
+        //}
+        //directions[0] = dTemp;
     }
     public void hit()
     {
         rb.MovePosition(startPos);
+    }
+    public string levelPoint(string name)
+    {
+
+        if (name == "level2"&& countlevel2==0)
+        {
+            startPos = rb.position;//tofo check if works
+            countlevel2++;
+            easyrotateControls();
+            Debug.Log("easy controls rotate");
+            return  "Keys rotation!!";
+
+        }
+        if (name == "level2.5" && countlevel2H == 0)
+        {
+            startPos = rb.position;//tofo check if works
+            countlevel2H++;
+            hardrotateControls();
+            Debug.Log("hard controls rotate");
+            return  "CRAZY KEYS ROTATION!!";
+        }
+        else return "";
     }
 }
 
