@@ -21,6 +21,7 @@ public class Frog : MonoBehaviour
     playermovment frogMove;
     text_announcments levelText;
     Rigidbody m_Rigidbody;
+    bool isDead = false;
 
 
     // Update is called once per frame
@@ -63,7 +64,7 @@ public class Frog : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col) 
 
     {
-        if (col.tag == "car")
+        if (col.tag == "car"&&!isDead)
         {
             hit();
         }
@@ -81,7 +82,7 @@ public class Frog : MonoBehaviour
         if (col.tag == "turtle")
         {
             GameObject other = col.gameObject;
-            if (other.GetComponent<turtle>().down == true)
+            if (other.GetComponent<turtle>().isDown() == true)
             {
                 Debug.Log("Youve drowned OnTriggerEnter2D");
                 drown();
@@ -100,10 +101,11 @@ public class Frog : MonoBehaviour
     //}
     void OnTriggerStay2D(Collider2D col)
     {
-        if (col.gameObject.tag == "turtle")
-            if (col.gameObject.GetComponent<turtle>().down == true)
+        if (col.gameObject.tag == "turtle"&& !isDead)
+            if (col.gameObject.GetComponent<turtle>().isDown() == true)
             {
                 Debug.Log("Youve drowned OnTriggerStay2D");
+                isDead = true;
                 drown();
             }
     }
@@ -135,6 +137,7 @@ public class Frog : MonoBehaviour
     void drown()
     {
         life = life - 1;
+        Debug.Log(life);
         SetLifeText();
         drownbool = true;
         if (life > 0)
@@ -170,6 +173,7 @@ public class Frog : MonoBehaviour
                 drownbool = false;
                 _attackTimer = 0;
                 frogMove.hit();
+                isDead = false;
                 //rb.MovePosition(startPos);
                 this.gameObject.GetComponent<SpriteRenderer>().sprite = frog;
             }

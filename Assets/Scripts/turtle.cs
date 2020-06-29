@@ -5,7 +5,7 @@ using UnityEngine;
 public class turtle : MonoBehaviour
 {
     public Sprite turtleUp, turtleDown;
-    public bool down = false;
+    bool down = false;
     public int timeUp = 4, timeDown = 3, countdownTimer;
     // Use this for initialization
     void Awake()
@@ -18,44 +18,44 @@ public class turtle : MonoBehaviour
     void Start()
     {
         activate();
-     }
-    private void Update()
+    }
+
+    public bool isDown()
     {
-       
+        return down;
+    }
+    private void activate()
+    {
+        StartCoroutine(imageCountdown());
 
     }
-        private void activate()
-        {
-            StartCoroutine(imageCountdown());
 
-        }
-
-        IEnumerator imageCountdown()
+    IEnumerator imageCountdown()
+    {
+        while (true)
         {
-            while (true)
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = turtleUp;
+            down = false;
+            countdownTimer = timeUp;
+        while (countdownTimer > 0)
             {
-                this.gameObject.GetComponent<SpriteRenderer>().sprite = turtleUp;
-                down = false;
-                countdownTimer = timeUp;
-            while (countdownTimer > 0)
-                {
-                    yield return new WaitForSeconds(1f);
-                    countdownTimer--;
-                }
-                this.gameObject.GetComponent<SpriteRenderer>().sprite = turtleDown;
-                countdownTimer = timeDown;
-                down = true;
-
-
-            while (countdownTimer > 0)
-                {
-                    yield return new WaitForSeconds(1f);
-                    countdownTimer--;
-                }
-
-
+                yield return new WaitForSeconds(1f);
+                countdownTimer--;
             }
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = turtleDown;
+            countdownTimer = timeDown;
+            down = true;
+
+
+        while (countdownTimer > 0)
+            {
+                yield return new WaitForSeconds(1f);
+                countdownTimer--;
+            }
+
+
         }
+    }
 
 }
 
