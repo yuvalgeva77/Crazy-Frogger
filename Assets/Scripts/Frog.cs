@@ -18,6 +18,8 @@ public class Frog : MonoBehaviour
     private bool drownbool = false, hitbool = false, _isfreeze=false;
     private float _attackTimer = 0f;
     public Health_bar healthBar;
+    public coinCounter coin_counter;
+
     playermovment frogMove;
     text_announcments levelText;
     Rigidbody m_Rigidbody;
@@ -36,7 +38,8 @@ public class Frog : MonoBehaviour
     {
         this.gameObject.GetComponent<SpriteRenderer>().sprite = frog;
         life = 3;
-        
+        coin_counter = this.GetComponentInChildren<coinCounter>();
+
         healthBar.SetMaxHealth(life);
         GameObject ngr = GameObject.FindWithTag("Manager");
         if (ngr)
@@ -88,6 +91,11 @@ public class Frog : MonoBehaviour
                 drown();
             }
 
+        }
+        if (col.tag == "coin")
+        {
+            Destroy(col.gameObject);
+            coin_counter.add();
         }
 
     }

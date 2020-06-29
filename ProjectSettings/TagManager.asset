@@ -4,10 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - PickUp
-  - Stone
   - car
-  - bird
   - Manager
   - backround
   - water
@@ -15,6 +12,7 @@ TagManager:
   - timer
   - level
   - turtle
+  - coin
   layers:
   - Default
   - TransparentFX
