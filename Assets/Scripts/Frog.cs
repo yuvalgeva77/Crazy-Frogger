@@ -20,13 +20,16 @@ public class Frog : MonoBehaviour
     public Health_bar healthBar;
     playermovment frogMove;
     text_announcments levelText;
+    Rigidbody m_Rigidbody;
+
 
     // Update is called once per frame
     void Awake()
     {
 
        audioSrc = GetComponent<AudioSource>();
-      //  healthBar = GetComponent<Health_bar>();
+        //  healthBar = GetComponent<Health_bar>();
+    
     }
      void Start()
     {
@@ -52,7 +55,10 @@ public class Frog : MonoBehaviour
         
         changeImage();
 
-
+    }
+    private void LateUpdate()
+    {
+        this.gameObject.GetComponent<Rigidbody2D>().WakeUp();
     }
     void OnTriggerEnter2D(Collider2D col) 
 
@@ -72,8 +78,37 @@ public class Frog : MonoBehaviour
             _freezer.Freeze();
 
         }
+        if (col.tag == "turtle")
+        {
+            GameObject other = col.gameObject;
+            if (other.GetComponent<turtle>().down == true)
+            {
+                Debug.Log("Youve drowned OnTriggerEnter2D");
+                drown();
+            }
+
+        }
 
     }
+    //void OnCollisionStay2D(Collision2D col)
+    //{
+    //    if (col.gameObject.tag == "turtle")
+    //        if (col.gameObject.GetComponent<turtle>().down == true)
+    //        {
+    //            drown();
+    //        }
+    //}
+    void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "turtle")
+            if (col.gameObject.GetComponent<turtle>().down == true)
+            {
+                Debug.Log("Youve drowned OnTriggerStay2D");
+                drown();
+            }
+    }
+
+
     void SetLifeText()
     {
         // lifeText.text = "lives: " + life.ToString();
