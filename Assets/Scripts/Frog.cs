@@ -7,15 +7,15 @@ using UnityEngine.UI;
 public class Frog : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public Sprite splash, underwater, frog;
-    public AudioClip splatSound, drownSound, trombone;
+    public Sprite splash, underwater, frog, frogleg;
+    public AudioClip splatSound, drownSound, trombone, eagleSound;
     public AudioSource audioSrc;
     Freezer _freezer;
     public float duration = 1f;
     public int life=3;
    // public Text lifeText;
     public Vector2 startPos;
-    private bool drownbool = false, hitbool = false, _isfreeze=false;
+    private bool drownbool = false, hitbool = false, eatenbool=false, _isfreeze=false;
     private float _attackTimer = 0f;
     public Health_bar healthBar;
     public coinCounter coin_counter;
@@ -77,6 +77,10 @@ public class Frog : MonoBehaviour
         if (col.tag == "water")
         {
             drown();
+        }
+        if (col.tag == "bird")
+        {
+            eaten();
         }
         if (col.tag == "level")
         {
@@ -156,6 +160,20 @@ public class Frog : MonoBehaviour
         }
         checkDead();
     }
+    void eaten()
+    {
+        life = life - 1;
+        Debug.Log(life);
+        SetLifeText();
+        eatenbool = true;
+        if (life > 0)
+        {
+            audioSrc.PlayOneShot(eagleSound);
+            Debug.Log("Youve been eaten!");
+            _freezer.Freeze();
+        }
+        checkDead();
+    }
     void changeImage()
     {
         if (hitbool == true)
@@ -167,6 +185,11 @@ public class Frog : MonoBehaviour
         {
             _isfreeze = true;
             this.gameObject.GetComponent<SpriteRenderer>().sprite = underwater;
+        }
+        if (eatenbool == true)
+        {
+            _isfreeze = true;
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = frogleg;
         }
         // while attacking, count up the timer.
         if (_isfreeze)
@@ -182,6 +205,7 @@ public class Frog : MonoBehaviour
                 _attackTimer = 0;
                 frogMove.hit();
                 isDead = false;
+                eatenbool = false;
                 //rb.MovePosition(startPos);
                 this.gameObject.GetComponent<SpriteRenderer>().sprite = frog;
             }

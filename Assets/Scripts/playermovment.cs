@@ -9,7 +9,7 @@ public class playermovment : MonoBehaviour
     public AudioClip  jump;
     public AudioSource audioSrc;
     KeyCode[] directions;
-    int countlevel2, countlevel2H;
+    int countlevel2, countlevel2H, countlevel3;
     // Start is called before the first frame update
 
     void Awake()
@@ -21,9 +21,10 @@ public class playermovment : MonoBehaviour
     }
     void Start()
     {
-        directions = new KeyCode[] { KeyCode.RightArrow, KeyCode.LeftArrow, KeyCode.UpArrow, KeyCode.DownArrow };
+         normalControlls();
         countlevel2 = 0;
         countlevel2H = 0;
+        countlevel3 = 0;
     }
     // Update is called once per frame
     void Update()
@@ -61,6 +62,11 @@ public class playermovment : MonoBehaviour
             rb.MovePosition(rb.position + Vector2.down);
         }
     }
+    void normalControlls()
+    {
+        directions = new KeyCode[] { KeyCode.RightArrow, KeyCode.LeftArrow, KeyCode.UpArrow, KeyCode.DownArrow };
+
+    }
     void easyrotateControls()
     {
         KeyCode dTemp = directions[1];
@@ -72,13 +78,6 @@ public class playermovment : MonoBehaviour
     }
     void hardrotateControls()
     {   directions= new KeyCode[] { KeyCode.UpArrow,  KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow};
-        //KeyCode dTemp = directions[3];
-        //for (int i = 2; i >= 0; i--)
-        //{
-        //    directions[i + 1] = directions[i];
-
-        //}
-        //directions[0] = dTemp;
     }
     public void hit()
     {
@@ -103,6 +102,14 @@ public class playermovment : MonoBehaviour
             hardrotateControls();
             Debug.Log("hard controls rotate");
             return  "CRAZY KEYS ROTATION!!";
+        }
+        if (name == "level3" && countlevel3 == 0)
+        {
+            startPos = rb.position;//tofo check if works
+            countlevel3++;
+            normalControlls();
+            Debug.Log("normal controls");
+            return "";
         }
         else return "";
     }
