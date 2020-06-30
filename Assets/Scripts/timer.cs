@@ -38,7 +38,7 @@ public class timer : MonoBehaviour {
         //Instance = this;
     }
     public void beginTimer()
-    {      
+    {
         //timer
         timeText.text = minutes + " : " + sec;
         if (minutes > 0)
@@ -67,8 +67,7 @@ public class timer : MonoBehaviour {
     }
     IEnumerator second()
     {
-        
-            yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f);
             if (sec > 0)
                 sec--;
             if (sec == 0 && minutes != 0)

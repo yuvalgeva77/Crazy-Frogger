@@ -28,6 +28,8 @@ public class playermovment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("playermovment Update");
+
         KeyCode right = directions[0];
         KeyCode left = directions[1];
         KeyCode up = directions[2];

@@ -13,6 +13,7 @@ TagManager:
   - level
   - turtle
   - coin
+  - timering
   layers:
   - Default
   - TransparentFX

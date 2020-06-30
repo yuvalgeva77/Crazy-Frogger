@@ -38,7 +38,7 @@ public class Frog : MonoBehaviour
     {
         this.gameObject.GetComponent<SpriteRenderer>().sprite = frog;
         life = 3;
-        coin_counter = this.GetComponentInChildren<coinCounter>();
+        coin_counter = this.gameObject.GetComponentInChildren<coinCounter>();
 
         healthBar.SetMaxHealth(life);
         GameObject ngr = GameObject.FindWithTag("Manager");
@@ -52,6 +52,7 @@ public class Frog : MonoBehaviour
         frogMove = this.gameObject.GetComponent<playermovment>();
         levelText = GameObject.Find("game levels").GetComponent<text_announcments>();
 
+
     }
     void Update()
     {
@@ -62,13 +63,15 @@ public class Frog : MonoBehaviour
     }
     private void LateUpdate()
     {
+        Debug.Log("LateUpdate");
+
         this.gameObject.GetComponent<Rigidbody2D>().WakeUp();
     }
-    void OnTriggerEnter2D(Collider2D col) 
-
+    void OnTriggerEnter2D(Collider2D col)
     {
         if (col.tag == "car"&&!isDead)
         {
+            isDead = true;
             hit();
         }
         if (col.tag == "water")
@@ -87,6 +90,7 @@ public class Frog : MonoBehaviour
             GameObject other = col.gameObject;
             if (other.GetComponent<turtle>().isDown() == true)
             {
+                isDead = true;
                 Debug.Log("Youve drowned OnTriggerEnter2D");
                 drown();
             }
@@ -99,23 +103,19 @@ public class Frog : MonoBehaviour
         }
 
     }
-    //void OnCollisionStay2D(Collision2D col)
-    //{
-    //    if (col.gameObject.tag == "turtle")
-    //        if (col.gameObject.GetComponent<turtle>().down == true)
-    //        {
-    //            drown();
-    //        }
-    //}
+
     void OnTriggerStay2D(Collider2D col)
     {
-        if (col.gameObject.tag == "turtle"&& !isDead)
+        if (col.gameObject.tag == "turtle" && !isDead)
+        {
+
             if (col.gameObject.GetComponent<turtle>().isDown() == true)
             {
                 Debug.Log("Youve drowned OnTriggerStay2D");
                 isDead = true;
                 drown();
             }
+        }
     }
 
 

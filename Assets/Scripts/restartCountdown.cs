@@ -23,13 +23,14 @@ public class restartCountdown : MonoBehaviour
             _freezer = ngr.GetComponent<Freezer>();
         }
         StartCoroutine(CountdownToStart());
-        GameObject gameTimer = GameObject.FindWithTag("timer");
-        if (gameTimer)
-        {
-            player = GameObject.FindWithTag("Player");
-            player.GetComponent<playermovment>() .enabled = false;
-            StartTimer = gameTimer.GetComponent<timer>();
-        }
+        player = GameObject.FindWithTag("Player");
+        //GameObject gameTimer = GameObject.FindWithTag("timering");
+        player.GetComponent<playermovment>().enabled = false;
+        //Debug.Log("gameTimer name "+gameTimer.name);
+        StartTimer = player.GetComponentInChildren<timer>();
+        Debug.Log( StartTimer);
+
+    
     }
   
     // Update is called once per frame
@@ -48,11 +49,13 @@ public class restartCountdown : MonoBehaviour
         }
         countdownDisplay.text = "GO!";
         //shouls restart life and clock
+
         StartTimer.beginTimer();
         //_freezer.FreezeAndRestartScene(3f);
         yield return new WaitForSeconds(1f);
         countdownDisplay.gameObject.SetActive(false);
         player.GetComponent<playermovment>().enabled = true;
+
 
     }
 }

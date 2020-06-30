@@ -7,9 +7,10 @@ using UnityEngine.UI;
 public class coinCounter : MonoBehaviour
 {
     Text Ttext;
-    static int coins;
+    static int coins=0;
     public AudioClip coinSound;
     public AudioSource audioSrc;
+
 
     private void Awake()
     {
@@ -21,7 +22,6 @@ public class coinCounter : MonoBehaviour
     void Start()
     {
         Ttext.text = "0";
-        coins = 0;
 
     }
     
