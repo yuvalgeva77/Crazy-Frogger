@@ -105,6 +105,11 @@ public class Frog : MonoBehaviour
             Destroy(col.gameObject);
             coin_counter.add();
         }
+        if (col.tag == "camel" && !isDead)
+        {
+            isDead = true;
+            hit();
+        }
 
     }
 

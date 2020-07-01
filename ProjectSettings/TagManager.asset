@@ -15,6 +15,7 @@ TagManager:
   - coin
   - timering
   - bird
+  - camel
   layers:
   - Default
   - TransparentFX
