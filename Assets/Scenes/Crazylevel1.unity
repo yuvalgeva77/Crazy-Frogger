@@ -2981,7 +2981,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints:
   - {fileID: 2139333997}
-  - {fileID: 0}
+  - {fileID: 407058043}
   moveSpeed: 1
   loop: 0
   sideToside: 1
@@ -3559,7 +3559,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints:
   - {fileID: 1220412401}
-  - {fileID: 0}
+  - {fileID: 1070652763}
   moveSpeed: 4
   loop: 0
   sideToside: 1
@@ -14403,7 +14403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints:
   - {fileID: 1727691507}
-  - {fileID: 0}
+  - {fileID: 1094991261}
   moveSpeed: 4
   loop: 0
   sideToside: 1
@@ -34491,7 +34491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints:
   - {fileID: 67454310}
-  - {fileID: 0}
+  - {fileID: 171732185}
   moveSpeed: 2
   loop: 0
   sideToside: 1
@@ -56738,7 +56738,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints:
   - {fileID: 1041763478}
-  - {fileID: 0}
+  - {fileID: 523065524}
   moveSpeed: 2
   loop: 0
   sideToside: 1
