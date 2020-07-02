@@ -244,8 +244,10 @@ public class Frog : MonoBehaviour
             Debug.Log("You loose!");
 
             timer gameTimer = this.gameObject.GetComponentInChildren<timer>();
-            gameTimer.waitForSong(trombone);
-            gameTimer.restart();
+            //gameTimer.waitForSong(trombone);
+            Debug.Log("trombone.lengt: "+ trombone.length);
+
+            gameTimer.restart(trombone.length);
         }
     }
 }

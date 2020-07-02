@@ -65,9 +65,11 @@ public class timer : MonoBehaviour {
 
         }
     }
-    public void restart()
+    public void restart(float time)
     {
-        _freezer.FreezeAndRestartScene(restartduration);
+        Debug.Log("restart: " + time);
+
+        _freezer.FreezeAndRestartScene(time);
         timesUp = true;
 
     }

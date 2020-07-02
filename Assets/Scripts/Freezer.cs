@@ -64,7 +64,11 @@ public class Freezer : MonoBehaviour
         _isFrozen = true;
         var orginal = Time.timeScale;
         Time.timeScale = 0f;
+        Debug.Log("DoFreeze: " + duration);
+        
         yield return new WaitForSecondsRealtime(duration);
+
+
         Time.timeScale = orginal;
         _pendingFreezeDuration = 0;
         _isFrozen = false;
@@ -106,8 +110,11 @@ public class Freezer : MonoBehaviour
     }
 
 public void FreezeAndRestartScene(float restartduration)
-{
-    _pendingFreezeDuration = restartduration;
+    {
+        Debug.Log("FreezeAndRestartScene: " + restartduration);
+
+        _pendingFreezeDuration = restartduration;
+        duration = restartduration;
     restartScene = true;
 }
 }

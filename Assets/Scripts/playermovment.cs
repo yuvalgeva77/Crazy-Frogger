@@ -162,8 +162,8 @@ public class playermovment : MonoBehaviour
             //SceneManager.LoadScene(scene.name);
             this.gameObject.GetComponent<playermovment>().enabled = false;
             timer gameTimer = this.gameObject.GetComponentInChildren<timer>();
-            gameTimer.waitForSong(winSound);
-            gameTimer.restart();
+            //gameTimer.waitForSong(winSound);
+            gameTimer.restart(winSound.length);
             return "YOU WIN";
 
 
