@@ -65,6 +65,12 @@ public class timer : MonoBehaviour {
 
         }
     }
+    public void restart()
+    {
+        _freezer.FreezeAndRestartScene(restartduration);
+        timesUp = true;
+
+    }
     IEnumerator second()
     {
         yield return new WaitForSeconds(1f);
@@ -80,6 +86,7 @@ public class timer : MonoBehaviour {
             StartCoroutine(second());
         
     }
+   
 
     void fillLoading()
     {
@@ -87,5 +94,17 @@ public class timer : MonoBehaviour {
         float fill = (float)totalSeconds / TOTAL_SECONDS;
         loading.fillAmount = fill;
     }
+   public void waitForSong(AudioClip song)
+    {
+       
+        StartCoroutine(timeCoroutine(song.length));
+
+    }
+    IEnumerator timeCoroutine(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+    }
+
 }
 

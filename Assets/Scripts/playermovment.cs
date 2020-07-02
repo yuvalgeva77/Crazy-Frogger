@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class playermovment : MonoBehaviour
 {
     public Rigidbody2D rb;
     public Vector2 startPos;
-    public AudioClip  jump;
+    public AudioClip  jump,levelup, winSound;
     public AudioSource audioSrc;
     KeyCode[] directions;
     int countlevel2, countlevel2H, countlevel3;
@@ -24,7 +26,7 @@ public class playermovment : MonoBehaviour
     }
     void Start()
     {
-         normalControlls();
+       normalControlls();
         countlevel2 = 0;
         countlevel2H = 0;
         countlevel3 = 0;
@@ -120,7 +122,8 @@ public class playermovment : MonoBehaviour
             countlevel2++;
             easyrotateControls();
             Debug.Log("easy controls rotate");
-            return  "Keys rotation!!";
+            audioSrc.PlayOneShot(levelup);
+            return "Keys rotation!!";
 
         }
         if (name == "level2.5" && countlevel2H == 0)
@@ -137,6 +140,8 @@ public class playermovment : MonoBehaviour
             countlevel3++;
             normalControlls();
             Debug.Log("normal controls");
+            audioSrc.PlayOneShot(levelup);
+
             //spawn
             if (numclones == 0) {
                 GameObject clone =Instantiate(frog, spawnPoint1.position, spawnPoint1.rotation);
@@ -147,8 +152,25 @@ public class playermovment : MonoBehaviour
                 numclones = 1;
             }
             return "";
+
         }
+        if (name == "win")
+        {        
+            audioSrc.PlayOneShot(winSound);
+            Debug.Log("Youve won!");
+            //Scene scene = SceneManager.GetActiveScene();
+            //SceneManager.LoadScene(scene.name);
+            this.gameObject.GetComponent<playermovment>().enabled = false;
+            timer gameTimer = this.gameObject.GetComponentInChildren<timer>();
+            gameTimer.waitForSong(winSound);
+            gameTimer.restart();
+            return "YOU WIN";
+
+
+        }
+
         else return "";
     }
+
 }
 

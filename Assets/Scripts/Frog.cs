@@ -110,6 +110,7 @@ public class Frog : MonoBehaviour
             isDead = true;
             hit();
         }
+        
 
     }
 
@@ -179,6 +180,7 @@ public class Frog : MonoBehaviour
         }
         checkDead();
     }
+   
     void changeImage()
     {
         if (hitbool == true)
@@ -235,11 +237,15 @@ public class Frog : MonoBehaviour
             changeImage();
             //audioSrc.PlayOneShot(splatSound);
             //this.gameObject.GetComponent<SpriteRenderer>().sprite = splash;
-            _freezer.Freeze();
-            _freezer.freezebackMusic();
+            //_freezer.Freeze();
+            frogMove.enabled = false;
+            //_freezer.freezebackMusic();
             audioSrc.PlayOneShot(trombone);
             Debug.Log("You loose!");
-            Destroy(this);
+
+            timer gameTimer = this.gameObject.GetComponentInChildren<timer>();
+            gameTimer.waitForSong(trombone);
+            gameTimer.restart();
         }
     }
 }

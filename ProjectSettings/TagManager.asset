@@ -16,6 +16,7 @@ TagManager:
   - timering
   - bird
   - camel
+  - win location
   layers:
   - Default
   - TransparentFX
