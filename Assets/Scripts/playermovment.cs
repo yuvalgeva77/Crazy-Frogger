@@ -11,6 +11,9 @@ public class playermovment : MonoBehaviour
     KeyCode[] directions;
     int countlevel2, countlevel2H, countlevel3;
     // Start is called before the first frame update
+    public Transform spawnPoint1, spawnPoint2;
+    public GameObject frog;
+    static int numclones=0;
 
     void Awake()
     {
@@ -81,7 +84,32 @@ public class playermovment : MonoBehaviour
     }
     public void hit()
     {
+        
         rb.MovePosition(startPos);
+        if (numclones >0)
+
+        {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player"); //get all obstacles
+            foreach (GameObject p in players) //access them individually  
+                if (p != this) {
+                    p.GetComponent<playermovment>().startOverLevel();
+                } 
+                        
+        }
+
+
+    }
+    public void startOverLevel ()
+    {
+
+        rb.MovePosition(startPos);
+        
+    }
+    public void setStartPoint(Vector2 start)
+    {
+
+        startPos = start;
+
     }
     public string levelPoint(string name)
     {
@@ -109,6 +137,15 @@ public class playermovment : MonoBehaviour
             countlevel3++;
             normalControlls();
             Debug.Log("normal controls");
+            //spawn
+            if (numclones == 0) {
+                GameObject clone =Instantiate(frog, spawnPoint1.position, spawnPoint1.rotation);
+                rb.position = spawnPoint2.position;
+                startPos= new Vector2(spawnPoint2.position.x, spawnPoint2.position.y);
+                Vector2 start = new Vector2(spawnPoint1.position.x, spawnPoint1.position.y);
+                clone.GetComponent<playermovment>().setStartPoint(start);
+                numclones = 1;
+            }
             return "";
         }
         else return "";
