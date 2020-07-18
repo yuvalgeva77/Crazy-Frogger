@@ -32,7 +32,7 @@ public class playermovment : MonoBehaviour
         countlevel3 = 0;
     }
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         Debug.Log("playermovment Update");
 
@@ -66,6 +66,7 @@ public class playermovment : MonoBehaviour
             audioSrc.PlayOneShot(jump);
             rb.MovePosition(rb.position + Vector2.down);
         }
+      
     }
     void normalControlls()
     {

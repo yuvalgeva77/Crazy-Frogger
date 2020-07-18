@@ -54,17 +54,19 @@ public class Frog : MonoBehaviour
 
 
     }
-    void Update()
-    {
-        this.gameObject.GetComponent<SpriteRenderer>().sprite = frog;
+    //void Update()
+    //{
+    //    this.gameObject.GetComponent<SpriteRenderer>().sprite = frog;
         
-        changeImage();
+    //    changeImage();
 
-    }
+    //}
     private void LateUpdate()
     {
         Debug.Log("LateUpdate");
+        this.gameObject.GetComponent<SpriteRenderer>().sprite = frog;
 
+        changeImage();
         this.gameObject.GetComponent<Rigidbody2D>().WakeUp();
     }
     void OnTriggerEnter2D(Collider2D col)
@@ -74,12 +76,14 @@ public class Frog : MonoBehaviour
             isDead = true;
             hit();
         }
-        if (col.tag == "water")
+        if (col.tag == "water" && !isDead)
         {
+            isDead = true;
             drown();
         }
-        if (col.tag == "bird")
+        if (col.tag == "bird" && !isDead)
         {
+            isDead = true;
             eaten();
         }
         if (col.tag == "level")
@@ -89,7 +93,7 @@ public class Frog : MonoBehaviour
             _freezer.Freeze();
 
         }
-        if (col.tag == "turtle")
+        if (col.tag == "turtle" && !isDead)
         {
             GameObject other = col.gameObject;
             if (other.GetComponent<turtle>().isDown() == true)

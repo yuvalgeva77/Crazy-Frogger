@@ -16,5 +16,13 @@ public class MainMenu : MonoBehaviour
         //EditorApplication.isPlaying = false;
         Application.Quit();
     }
+    public void RestartGame()
+    {
+        Debug.Log("RESTART");
+        //EditorApplication.isPlaying = false;
+        timer gameTimer = GameObject.FindWithTag("timer").GetComponent<timer>();
+        Debug.Log("RESTART");
+        gameTimer.restart(0.2f);
+    }
 
 }
