@@ -73,14 +73,17 @@ private void updateAngle()
     Quaternion angleAxis = Quaternion.AngleAxis(angle, Vector3.forward);
     transform.rotation = Quaternion.Slerp(transform.rotation, angleAxis, 1f);
 
-
         if (angle==- 90 )
         {
+
             transform.RotateAround(transform.position, transform.up, 180f);
+
         }
         if (angle == 90)
         {
-            transform.RotateAround(transform.position, transform.up, -180f);
+
+            //transform.RotateAround(transform.position, transform.up, -180f);
+
         }
     }
     // Method that actually make Enemy walk

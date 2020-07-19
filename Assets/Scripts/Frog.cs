@@ -141,8 +141,9 @@ public class Frog : MonoBehaviour
         Debug.Log(healthBar.GetLife());
     }
     void hit()
-    {  
-       // hitbool = true;
+    {
+        frogMove.enabled = false;
+        // hitbool = true;
         //life = life - 1;
         SetLifeText();
         hitbool = true;
@@ -160,6 +161,7 @@ public class Frog : MonoBehaviour
     }
     void drown()
     {
+        frogMove.enabled = false;
         //life = life - 1;
         SetLifeText();
         drownbool = true;
@@ -173,6 +175,7 @@ public class Frog : MonoBehaviour
     }
     void eaten()
     {
+        frogMove.enabled = false;
         //life = life - 1;
         SetLifeText();
         Debug.Log(healthBar.GetLife());
@@ -188,6 +191,7 @@ public class Frog : MonoBehaviour
    
     void changeImage()
     {
+
         if (hitbool == true)
         {
             _isfreeze = true;
@@ -220,6 +224,8 @@ public class Frog : MonoBehaviour
                 eatenbool = false;
                 //rb.MovePosition(startPos);
                 this.gameObject.GetComponent<SpriteRenderer>().sprite = frog;
+                frogMove.enabled = true;
+
             }
         }
     }
