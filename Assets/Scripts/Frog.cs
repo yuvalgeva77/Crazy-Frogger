@@ -19,11 +19,11 @@ public class Frog : MonoBehaviour
     private float _attackTimer = 0f;
     public Health_bar healthBar;
     public coinCounter coin_counter;
-
+    public timer gameTimer;
     playermovment frogMove;
     text_announcments levelText;
     Rigidbody m_Rigidbody;
-    bool isDead = false;
+    static bool isDead = false;
 
 
     // Update is called once per frame
@@ -36,6 +36,7 @@ public class Frog : MonoBehaviour
     }
      void Start()
     {
+        gameTimer = this.gameObject.GetComponentInChildren<timer>();
         this.gameObject.GetComponent<SpriteRenderer>().sprite = frog;
         life = 3;
         coin_counter = this.gameObject.GetComponentInChildren<coinCounter>();
@@ -51,7 +52,7 @@ public class Frog : MonoBehaviour
         }
         frogMove = this.gameObject.GetComponent<playermovment>();
         levelText = GameObject.Find("game levels").GetComponent<text_announcments>();
-
+        
 
     }
     //void Update()
@@ -96,10 +97,9 @@ public class Frog : MonoBehaviour
         if (col.tag == "turtle" && !isDead)
         {
             GameObject other = col.gameObject;
-            if (other.GetComponent<turtle>().isDown() == true)
+            if (other.GetComponent<turtle>().isDown() == true && !isDead)
             {
                 isDead = true;
-                Debug.Log("Youve drowned OnTriggerEnter2D");
                 drown();
             }
 
@@ -137,14 +137,15 @@ public class Frog : MonoBehaviour
     {
         // lifeText.text = "lives: " + life.ToString();
         healthBar.MinusHealth();
+        Debug.Log(healthBar.GetLife());
     }
     void hit()
     {  
        // hitbool = true;
-        life = life - 1;
+        //life = life - 1;
         SetLifeText();
         hitbool = true;
-        if (life > 0)
+        if (healthBar.GetLife() > 0)
         {
             audioSrc.PlayOneShot(splatSound);
             Debug.Log("Youve been hit!");
@@ -158,11 +159,10 @@ public class Frog : MonoBehaviour
     }
     void drown()
     {
-        life = life - 1;
-        Debug.Log(life);
+        //life = life - 1;
         SetLifeText();
         drownbool = true;
-        if (life > 0)
+        if (healthBar.GetLife() > 0)
         {
             audioSrc.PlayOneShot(drownSound);
             Debug.Log("Youve drowned!");
@@ -172,11 +172,11 @@ public class Frog : MonoBehaviour
     }
     void eaten()
     {
-        life = life - 1;
-        Debug.Log(life);
+        //life = life - 1;
         SetLifeText();
+        Debug.Log(healthBar.GetLife());
         eatenbool = true;
-        if (life > 0)
+        if (healthBar.GetLife() > 0)
         {
             audioSrc.PlayOneShot(eagleSound);
             Debug.Log("Youve been eaten!");
@@ -235,7 +235,7 @@ public class Frog : MonoBehaviour
     }
     void checkDead()
     {
-        if (life == 0)
+        if (healthBar.GetLife() == 0)
         {
             dieSound();
             changeImage();
@@ -247,11 +247,13 @@ public class Frog : MonoBehaviour
             audioSrc.PlayOneShot(trombone);
             Debug.Log("You loose!");
 
-            timer gameTimer = this.gameObject.GetComponentInChildren<timer>();
+            //timer gameTimer = this.gameObject.GetComponentInChildren<timer>();
             //gameTimer.waitForSong(trombone);
             Debug.Log("trombone.lengt: "+ trombone.length);
-
+            isDead = false;
+            frogMove.RemoteSettingsnumClones();
             gameTimer.restart(trombone.length);
+            
         }
     }
 }

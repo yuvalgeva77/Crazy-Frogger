@@ -16,8 +16,8 @@ public class timer : MonoBehaviour {
     public AudioSource audioSrc;
     bool timesUp = false;
     Freezer _freezer;
-    float restartduration = 10f;
-   public bool timergoint = false;
+    float restartduration = 5f;
+    public bool timergoint = false;
 
     void Start()
     {
@@ -68,7 +68,11 @@ public class timer : MonoBehaviour {
     public void restart(float time)
     {
         Debug.Log("restart: " + time);
-
+        GameObject ngr = GameObject.FindWithTag("Manager");
+        if (ngr)
+        {
+            _freezer = ngr.GetComponent<Freezer>();
+        }
         _freezer.FreezeAndRestartScene(time);
         timesUp = true;
 

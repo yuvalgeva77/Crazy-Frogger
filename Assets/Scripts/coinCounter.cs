@@ -22,6 +22,7 @@ public class coinCounter : MonoBehaviour
     void Start()
     {
         Ttext.text = "0";
+        coins = 0;
 
     }
     

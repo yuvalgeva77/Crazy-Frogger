@@ -15,7 +15,7 @@ public class playermovment : MonoBehaviour
     // Start is called before the first frame update
     public Transform spawnPoint1, spawnPoint2;
     public GameObject frog;
-    static int numclones=0;
+    public static int numclones=0;
 
     void Awake()
     {
@@ -30,6 +30,7 @@ public class playermovment : MonoBehaviour
         countlevel2 = 0;
         countlevel2H = 0;
         countlevel3 = 0;
+        
     }
     // Update is called once per frame
     void LateUpdate()
@@ -89,6 +90,7 @@ public class playermovment : MonoBehaviour
     {
         
         rb.MovePosition(startPos);
+        Debug.Log("hit " + startPos);
         if (numclones >0)
 
         {
@@ -97,6 +99,7 @@ public class playermovment : MonoBehaviour
                 if (p != this) {
                     p.GetComponent<playermovment>().startOverLevel();
                 } 
+
                         
         }
 
@@ -106,7 +109,9 @@ public class playermovment : MonoBehaviour
     {
 
         rb.MovePosition(startPos);
-        
+        Debug.Log("startOverLevel "+ startPos);
+
+
     }
     public void setStartPoint(Vector2 start)
     {
@@ -150,6 +155,28 @@ public class playermovment : MonoBehaviour
                 startPos= new Vector2(spawnPoint2.position.x, spawnPoint2.position.y);
                 Vector2 start = new Vector2(spawnPoint1.position.x, spawnPoint1.position.y);
                 clone.GetComponent<playermovment>().setStartPoint(start);
+                gameObject.AddComponent< FixedJoint2D >();
+                gameObject.GetComponent<FixedJoint2D>().connectedBody = clone.GetComponent<Rigidbody2D>();
+                foreach (Transform child in clone.transform)
+                {
+                    GameObject.Destroy(child.gameObject);
+                }
+                clone.gameObject.GetComponent<Frog>().healthBar = gameObject.GetComponent<Frog>().healthBar;
+                coinCounter co = gameObject.GetComponent<Frog>().coin_counter;
+                Debug.Log("frog coins: "+ co);
+                clone.gameObject.GetComponent<Frog>().coin_counter = gameObject.GetComponent<Frog>().coin_counter;
+                co = clone.gameObject.GetComponent<Frog>().coin_counter;
+                Debug.Log("clone coins: " + co);
+                clone.gameObject.GetComponent<playermovment>().jump = null;
+                clone.gameObject.GetComponent<playermovment>().levelup = null;
+                clone.gameObject.GetComponent<playermovment>().winSound = null;
+
+
+                clone.gameObject.GetComponent<Frog>().gameTimer = gameObject.GetComponent<Frog>().gameTimer;
+
+
+
+
                 numclones = 1;
             }
             return "";
@@ -171,6 +198,10 @@ public class playermovment : MonoBehaviour
         }
 
         else return "";
+    }
+    public void RemoteSettingsnumClones()
+    {
+        numclones = 0;
     }
 
 }
