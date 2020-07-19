@@ -170,6 +170,8 @@ public class playermovment : MonoBehaviour
                 clone.gameObject.GetComponent<playermovment>().jump = null;
                 clone.gameObject.GetComponent<playermovment>().levelup = null;
                 clone.gameObject.GetComponent<playermovment>().winSound = null;
+                clone.gameObject.GetComponent<playermovment>().rb = clone.GetComponent<Rigidbody2D>();
+
 
 
                 clone.gameObject.GetComponent<Frog>().gameTimer = gameObject.GetComponent<Frog>().gameTimer;
@@ -191,6 +193,7 @@ public class playermovment : MonoBehaviour
             this.gameObject.GetComponent<playermovment>().enabled = false;
             timer gameTimer = this.gameObject.GetComponentInChildren<timer>();
             //gameTimer.waitForSong(winSound);
+            Debug.Log("winSound.lengt: " + winSound.length);
             gameTimer.restart(winSound.length);
             return "YOU WIN";
 
