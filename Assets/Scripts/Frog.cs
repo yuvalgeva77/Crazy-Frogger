@@ -91,7 +91,8 @@ public class Frog : MonoBehaviour
         {
             string levelT=frogMove.levelPoint(col.name);
             levelText.writeText(levelT, 2);
-            _freezer.Freeze();
+            if(levelT!="")
+             _freezer.Freeze();
 
         }
         if (col.tag == "turtle" && !isDead)
