@@ -41,4 +41,11 @@ public class CameraControler : MonoBehaviour
         }
         
     }
+
+    public void shiftOffset(Vector3 vec)
+    {
+        offset = offset + vec;
+           
+    }
+
 }

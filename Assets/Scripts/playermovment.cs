@@ -176,9 +176,14 @@ public class playermovment : MonoBehaviour
                 clone.gameObject.GetComponent<playermovment>().rb = clone.GetComponent<Rigidbody2D>();
                 clone.gameObject.GetComponent<Frog>().gameTimer = gameObject.GetComponent<Frog>().gameTimer;
                 numclones = 1;
+                
             }
-            return "";
+            Vector3 vec=new Vector3(-2, 0, 0);
+            GameObject camera= GameObject.Find("Main Camera");
+            camera.gameObject.GetComponent<CameraControler>().shiftOffset(vec);
 
+
+            return "TWINZIES!";
         }
         if (name == "win")
         {        
@@ -191,9 +196,7 @@ public class playermovment : MonoBehaviour
             //gameTimer.waitForSong(winSound);
             Debug.Log("winSound.lengt: " + winSound.length);
             gameTimer.restart(winSound.length);
-            return "YOU WIN";
-
-
+            return "YOU WIN!!";
         }
 
         else return "";
