@@ -24,5 +24,11 @@ public class MainMenu : MonoBehaviour
         Debug.Log("RESTART");
         gameTimer.restart(0.2f);
     }
+    public void back()
+    {
+        Debug.Log("back");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+
+    }
 
 }
