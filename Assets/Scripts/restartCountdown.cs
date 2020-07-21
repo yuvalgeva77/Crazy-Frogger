@@ -29,10 +29,12 @@ public class restartCountdown : MonoBehaviour
         //Debug.Log("gameTimer name "+gameTimer.name);
         StartTimer = player.GetComponentInChildren<timer>();
         Debug.Log( StartTimer);
+        player.GetComponent<playermovment>().RemoteSettingsnumClones();
 
-    
+
+
     }
-  
+
     // Update is called once per frame
     void Update()
     {

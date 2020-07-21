@@ -57,7 +57,7 @@ public class timer : MonoBehaviour {
             timeText.text = "Time's Up!";
             if (!timesUp) {
                 audioSrc.PlayOneShot(clockRing);
-                _freezer.FreezeAndRestartScene(restartduration);
+                _freezer.FreezeAndRestartScene(clockRing.length);
                 StopCoroutine(second());
                 timesUp = true;
             }

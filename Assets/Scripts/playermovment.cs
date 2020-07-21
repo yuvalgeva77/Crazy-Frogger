@@ -19,7 +19,6 @@ public class playermovment : MonoBehaviour
 
     void Awake()
     {
-
         audioSrc = GetComponent<AudioSource>();
         startPos = rb.position;
 
