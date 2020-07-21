@@ -36,7 +36,7 @@ public class playermovment : MonoBehaviour
     void LateUpdate()
     {
 
-        Debug.Log("in LateUpdate,rb.position " + rb.position);
+        //Debug.Log("in LateUpdate,rb.position " + rb.position);
         KeyCode right = directions[0];
         KeyCode left = directions[1];
         KeyCode up = directions[2];
@@ -88,8 +88,8 @@ public class playermovment : MonoBehaviour
     }
     public void hit()
     {
-        
-        rb.MovePosition(startPos);
+
+        startOverLevel();
         Debug.Log("hit " + startPos);
         if (numclones >0)
 
@@ -107,9 +107,9 @@ public class playermovment : MonoBehaviour
     }
     public void startOverLevel ()
     {
-
-        rb.MovePosition(startPos);
-        Debug.Log("startOverLevel "+ startPos);
+        rb.position = startPos;
+        //rb.MovePosition(startPos);
+        Debug.Log("startOverLevel move to startPos:" + startPos);
        
 
 
@@ -138,7 +138,7 @@ public class playermovment : MonoBehaviour
             startPos = rb.position;//tofo check if works
             countlevel2H++;
             hardrotateControls();
-            Debug.Log("hard controls rotate");
+            Debug.Log("hard controls rotate,startPos: "+ startPos);
             return  "CRAZY KEYS ROTATION!!";
         }
         if (name == "level3" && countlevel3 == 0)
@@ -146,7 +146,7 @@ public class playermovment : MonoBehaviour
             startPos = rb.position;//tofo check if works
             countlevel3++;
             normalControlls();
-            Debug.Log("normal controls");
+            Debug.Log("normal controls,startPos: " + startPos);
             audioSrc.PlayOneShot(levelup);
 
             //spawn
@@ -162,11 +162,17 @@ public class playermovment : MonoBehaviour
                
                 gameObject.AddComponent< FixedJoint2D >();
                 gameObject.GetComponent<FixedJoint2D>().connectedBody = clone.GetComponent<Rigidbody2D>();
+
+                clone.gameObject.GetComponent<Frog>().healthBar = gameObject.GetComponent<Frog>().healthBar;
+
                 foreach (Transform child in clone.transform)
                 {
                     GameObject.Destroy(child.gameObject);
                 }
-                clone.gameObject.GetComponent<Frog>().healthBar = gameObject.GetComponent<Frog>().healthBar;
+         
+
+
+
                 coinCounter co = gameObject.GetComponent<Frog>().coin_counter;
                 clone.gameObject.GetComponent<Frog>().coin_counter = gameObject.GetComponent<Frog>().coin_counter;
                 co = clone.gameObject.GetComponent<Frog>().coin_counter;

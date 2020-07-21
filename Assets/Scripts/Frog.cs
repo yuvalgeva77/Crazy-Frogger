@@ -40,8 +40,8 @@ public class Frog : MonoBehaviour
         this.gameObject.GetComponent<SpriteRenderer>().sprite = frog;
         life = 3;
         coin_counter = this.gameObject.GetComponentInChildren<coinCounter>();
-
-        healthBar.SetMaxHealth(life);
+        if(playermovment.numclones==0)
+          healthBar.SetMaxHealth(life);
         GameObject ngr = GameObject.FindWithTag("Manager");
         if (ngr)
         {
@@ -64,7 +64,6 @@ public class Frog : MonoBehaviour
     //}
     private void LateUpdate()
     {
-        Debug.Log("LateUpdate");
         this.gameObject.GetComponent<SpriteRenderer>().sprite = frog;
 
         changeImage();
@@ -219,12 +218,12 @@ public class Frog : MonoBehaviour
                 hitbool = false;
                 drownbool = false;
                 _attackTimer = 0;
+                frogMove.enabled = true;
                 frogMove.hit();
                 isDead = false;
                 eatenbool = false;
                 //rb.MovePosition(startPos);
                 this.gameObject.GetComponent<SpriteRenderer>().sprite = frog;
-                frogMove.enabled = true;
 
             }
         }

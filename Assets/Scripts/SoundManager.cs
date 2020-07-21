@@ -18,11 +18,12 @@ using UnityEngine;
         }
         else
         {
-            instance = null;
-        }
+            instance =this;
+        
         DontDestroyOnLoad(this.gameObject);
+        }
 
-     }
+    }
     //Play Global End
 
 
