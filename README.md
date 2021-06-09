@@ -5,7 +5,7 @@ little frogy had a bet with a friend that she can cross the frog's country befor
 Quickly cross the land and sea before time's up  and gain as much coins as you can for her next trips around the world! 
 GOOD LUCK!
 
-# you can play at: https://yuvalg.itch.io/crazy-frogger
+### you can play it: https://yuvalg.itch.io/crazy-frogger
 
-![](https://github.com/yuvalgeva77/Crazy-Frogger/blob/master/display%20frogger.JPG)
+![](https://github.com/yuvalgeva77/Crazy-Frogger/blob/master/display%20frogger.JPG) ###
 
